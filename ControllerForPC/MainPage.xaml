@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ControllerForPC.MainPage"
+             BackgroundColor="Black">
+    
+
+    <Grid x:Name="JoystickLayout" HorizontalOptions="Center" VerticalOptions="Center">
+        
+        <BoxView x:Name="JoystickArea" BackgroundColor="#111" WidthRequest="300" HeightRequest="300" CornerRadius="150" />
+
+
+
+        <!-- Joystick top (the movable part of the joystick) -->
+        <BoxView x:Name="JoystickBall" Color="DarkGray" WidthRequest="150" HeightRequest="150" CornerRadius="75">
+            <BoxView.GestureRecognizers>
+                <!-- PanGestureRecognizer kullanarak topun hareketini izliyoruz -->
+                <PanGestureRecognizer PanUpdated="JoystickOnPanUpdated"/>
+            </BoxView.GestureRecognizers>
+            
+        </BoxView>
+    </Grid>
+
+</ContentPage>
