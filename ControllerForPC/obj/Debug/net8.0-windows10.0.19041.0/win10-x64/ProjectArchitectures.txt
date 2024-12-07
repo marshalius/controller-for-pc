@@ -1,1 +1,0 @@
-C:\Users\canda\Desktop\Repositories\ControllerForPC\ControllerForPC\ControllerForPC.csproj;x64
