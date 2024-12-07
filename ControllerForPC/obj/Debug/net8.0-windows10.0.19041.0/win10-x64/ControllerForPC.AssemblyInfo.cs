@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ControllerForPC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+bd41a4eb4e01920af5bfbaec92bbe07ed850eab8")]
 [assembly: System.Reflection.AssemblyProductAttribute("ControllerForPC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ControllerForPC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

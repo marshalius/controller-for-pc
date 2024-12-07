@@ -4,13 +4,14 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ControllerForPC"
+    xmlns:pages="clr-namespace:ControllerForPC.Pages"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Title="ControllerForPC">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate pages:ConnectionPage}"
         Route="MainPage" />
 
 </Shell>

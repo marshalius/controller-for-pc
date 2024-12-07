@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ControllerForPC.Pages;
+using ControllerForPC.Services;
+using ControllerForPC.Services.Contracts;
+using Microsoft.Extensions.Logging;
 
 namespace ControllerForPC
 {
@@ -18,6 +21,9 @@ namespace ControllerForPC
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            //builder.Services.AddSingleton<IConnectionManager, ConnectionManager>();
+            //builder.Services.AddSingleton<ITcpService, TcpService>();
+            //builder.Services.AddTransient<ConnectionPage>();
 
             return builder.Build();
         }

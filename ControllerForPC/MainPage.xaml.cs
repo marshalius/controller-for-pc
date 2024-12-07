@@ -1,176 +1,242 @@
-﻿using Microsoft.Maui.Layouts;
+﻿using ControllerForPC.Utilities;
+using Microsoft.Maui.Layouts;
+using System.Linq.Expressions;
+using System.Net.Sockets;
+using System.Text;
 
 namespace ControllerForPC
 {
     public partial class MainPage : ContentPage
     {
+        readonly TcpConnection tcp;
+        readonly JoystickUtility leftJoystick;
+        readonly JoystickUtility rightJoystick;
         double screenWidth;
         double screenHeight;
-        
-
-        Frame joystick = new Frame { BorderColor = Colors.Black, BackgroundColor = Colors.Transparent, };
-        Button YButton;
-        Button XButton;
-        Button AButton;
-        Button BButton;
-        Grid XYABLayout;
-        AbsoluteLayout ContentLayout;
 
         public MainPage()
         {
             InitializeComponent();
-#if ANDROID
-            screenWidth = DeviceDisplay.MainDisplayInfo.Height;
-            screenHeight = DeviceDisplay.MainDisplayInfo.Width;
-#elif WINDOWS
-            screenWidth = DeviceDisplay.MainDisplayInfo.Width;
-            screenHeight = DeviceDisplay.MainDisplayInfo.Height;
-#endif
-            int corner = Convert.ToInt32(screenHeight * 0.0675);
-            YButton = new Button { Text = "Y", FontSize = 48, CornerRadius = short.MaxValue, FontAttributes = FontAttributes.Bold, TextColor = Colors.Yellow, BackgroundColor = Colors.Transparent, BorderColor = Colors.Gray, BorderWidth = 2 };
-            XButton = new Button { Text = "X", FontSize = 48, CornerRadius = short.MaxValue, FontAttributes = FontAttributes.Bold, TextColor = Color.FromRgba("#0AF"), BackgroundColor = Colors.Transparent, BorderColor = Colors.Gray, BorderWidth = 2 };
-            AButton = new Button { Text = "A", FontSize = 48, CornerRadius = short.MaxValue, FontAttributes = FontAttributes.Bold, TextColor = Color.FromRgba("#0F0"), BackgroundColor = Colors.Transparent, BorderColor = Colors.Gray, BorderWidth = 2 };
-            BButton = new Button { Text = "B", FontSize = 48, CornerRadius = short.MaxValue, FontAttributes = FontAttributes.Bold, TextColor = Color.FromRgba("#F00"), BackgroundColor = Colors.Transparent, BorderColor = Colors.Gray, BorderWidth = 2 };
 
+            tcp = new();
+            leftJoystick = new(LeftJoystickArea, LeftJoystickBall);
+            rightJoystick = new(RightJoystickArea, RightJoystickBall);
 
-            ContentLayout = new AbsoluteLayout();
-            XYABLayout = new Grid();
+            var accelerometer = Accelerometer.Default;
+            accelerometer.Start(SensorSpeed.Game);
+            accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
 
-            XYABLayout.AddColumnDefinition(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            XYABLayout.AddColumnDefinition(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            XYABLayout.AddColumnDefinition(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            XYABLayout.AddRowDefinition(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            XYABLayout.AddRowDefinition(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            XYABLayout.AddRowDefinition(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-
-            XYABLayout.Children.Add(XButton);
-            XYABLayout.Children.Add(YButton);
-            XYABLayout.Children.Add(AButton);
-            XYABLayout.Children.Add(BButton);
-
-            XYABLayout.SetColumn(XButton, 0);
-            XYABLayout.SetColumn(YButton, 1);
-            XYABLayout.SetColumn(AButton, 1);
-            XYABLayout.SetColumn(BButton, 2);
-
-            XYABLayout.SetRow(XButton, 1);
-            XYABLayout.SetRow(YButton, 0);
-            XYABLayout.SetRow(AButton, 2);
-            XYABLayout.SetRow(BButton, 1);
-
-            Content = ContentLayout;
-
-            ContentLayout.SetLayoutBounds(XYABLayout, new Rect(0.9, 0.5, screenHeight * 0.4/screenWidth, screenHeight * 0.4/screenHeight));
-            ContentLayout.SetLayoutFlags(XYABLayout, AbsoluteLayoutFlags.All);
-            ContentLayout.Children.Add(XYABLayout);
-
-
-
-            YButton.Pressed += YButton_Pressed;
-            XButton.Pressed += XButton_Pressed;
-            AButton.Pressed += AButton_Pressed;
-            BButton.Pressed += BButton_Pressed;
-
-            YButton.Released += YButton_Released;
-            XButton.Released += XButton_Released;
-            AButton.Released += AButton_Released;
-            BButton.Released += BButton_Released;
-
-
-            var joystickGesture = new PanGestureRecognizer();
-            joystickGesture.PanUpdated += OnPanUpdated;
-            ContentLayout.GestureRecognizers.Add(joystickGesture);
-
-            ContentLayout.SetLayoutBounds(JoystickLayout, new Rect(0.15, 0.8, screenHeight*0.3/screenWidth, screenHeight * 0.3 / screenHeight));
-            ContentLayout.SetLayoutFlags(JoystickLayout, AbsoluteLayoutFlags.All);
-            ContentLayout.Children.Add(JoystickLayout);
+            InitializeAsync();
         }
-        private bool IsJoystickActivated = false;
-        private void JoystickOnPanUpdated(object sender, PanUpdatedEventArgs e)
+        private async void InitializeAsync()
         {
-            IsJoystickActivated = true;
-        }
-        private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
-        {
-            if(IsJoystickActivated)
+            try
             {
-                if (e.StatusType == GestureStatus.Running)
-                {
-                    double x = e.TotalX;
-                    double y = e.TotalY;
+                await tcp.ConnectToServerAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Sunucuya bağlanılamadı: {e}");
+                throw;
+            }
+        }
 
-
-                    double distance = Math.Sqrt(x * x + y * y); // X ve Y'nin karelerinin toplamı (hipotenüs)
-
-                    if (distance > JoystickArea.Width / 2)
-                    {
-                        // Eğer mesafe dairenin yarıçapını aşarsa, joystick'i daire sınırına kısıtla
-                        double ratio = (JoystickArea.Width / 2) / distance;
-                        x *= ratio;
-                        y *= ratio;
-                    }
-
-
-                    double newX = x;
-                    double newY = y;
-
-                    // Joystick'in hareketini alandaki sınırlara göre güncelle
-                    JoystickBall.TranslationX = newX;
-                    JoystickBall.TranslationY = newY;
-                }
-                else if (e.StatusType == GestureStatus.Completed)
-                {
-                    JoystickBall.TranslationX = 0;
-                    JoystickBall.TranslationY = 0;
-                    IsJoystickActivated = false;
-                }
+        double lastAxisY = 0;
+        private async void Accelerometer_ReadingChanged(object? sender, AccelerometerChangedEventArgs e)
+        {
+            double axisY = Math.Round(e.Reading.Acceleration.Y, 2);
+            if(axisY != lastAxisY)
+            {
+                await tcp.SendMessageAsync($"Accelerometer:{axisY}");
+                lastAxisY = axisY;
             }
             
         }
 
-        private void BButton_Pressed(object? sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            BButton.BackgroundColor = Color.FromRgba("#F00");
-            BButton.TextColor = Colors.White;
-        }
-        private void BButton_Released(object? sender, EventArgs e)
-        {
-            BButton.BackgroundColor = Colors.Transparent;
-            BButton.TextColor = Color.FromRgba("#F00");
-        }
-        private void AButton_Pressed(object? sender, EventArgs e)
-        {
-            AButton.BackgroundColor = Color.FromRgba("#0F0");
-            AButton.TextColor = Colors.Black;
-        }
-        private void AButton_Released(object? sender, EventArgs e)
-        {
-            AButton.BackgroundColor = Colors.Transparent;
-            AButton.TextColor = Color.FromRgba("#0F0");
-        }
-        private void XButton_Pressed(object? sender, EventArgs e)
-        {
-            XButton.BackgroundColor = Color.FromRgba("#00F");
-            XButton.TextColor = Colors.White;
-        }
-        private void XButton_Released(object? sender, EventArgs e)
-        {
-            XButton.BackgroundColor = Colors.Transparent;
-            XButton.TextColor = Color.FromRgba("#00F");
-        }
+            base.OnAppearing();
+            Dispatcher.DispatchAsync(() =>
+            {
+                screenWidth = ContentLayout.Width;
+                screenHeight = ContentLayout.Height;
+                
+                ContentLayout.SetLayoutBounds(XYABLayout, new Rect(0.9, 0.1, screenHeight * 0.5, screenHeight * 0.5));
+                ContentLayout.SetLayoutBounds(DirectionalLayout, new Rect(0.1, 0.1, screenHeight * 0.4, screenHeight * 0.4));
 
-        private void YButton_Pressed(object? sender, EventArgs e)
-        {
-            YButton.BackgroundColor = Colors.Yellow;
-            YButton.TextColor = Colors.Black;
-        }
-        private void YButton_Released(object? sender, EventArgs e)
-        {
-            YButton.BackgroundColor = Colors.Transparent;
-            YButton.TextColor = Colors.Yellow;
-        }
+                ContentLayout.SetLayoutBounds(ShareButton, new Rect(0.43, 0.35, screenHeight * 0.1, screenHeight * 0.05));
+                ContentLayout.SetLayoutBounds(MenuButton, new Rect(0.57, 0.35, screenHeight * 0.1, screenHeight * 0.05));
 
+                ContentLayout.SetLayoutBounds(LeftButtonLayout, new Rect(0.35, 0, screenHeight * 0.16, screenHeight * 0.24));
+                ContentLayout.SetLayoutBounds(RightButtonLayout, new Rect(0.65, 0, screenHeight * 0.16, screenHeight * 0.24));
+
+                ContentLayout.SetLayoutBounds(LeftJoystickLayout, new Rect(0.32, 0.7, screenHeight * 0.3 / screenWidth, screenHeight * 0.3 / screenHeight));
+                ContentLayout.SetLayoutBounds(RightJoystickLayout, new Rect(0.68, 0.7, screenHeight * 0.3 / screenWidth, screenHeight * 0.3 / screenHeight));
+
+                ContentLayout.SetLayoutBounds(BackgroundView, new Rect(0, 0, screenWidth, screenHeight));
+            });
+
+        }
         
+        private void ChangeButtonColor(Button button, Color backgroundColor, Color textColor, bool vibrate = false)
+        {
+            button.BackgroundColor = backgroundColor;
+            button.TextColor = textColor;
+            if(vibrate)
+            {
+                Vibration.Vibrate(1);
+            }
+        }
+        private async void LeftJoystickPan_PanUpdated(object? sender, PanUpdatedEventArgs e)
+        {
+            (short X, short Y) = leftJoystick.JoystickPanController(e);
+            await tcp.SendMessageAsync($"Analog LX:{X} LY:{Y}");
+        }
+        private async void RightJoystickPan_PanUpdated(object? sender, PanUpdatedEventArgs e)
+        {
+            (short X, short Y) = rightJoystick.JoystickPanController(e);
+            await tcp.SendMessageAsync($"Analog RX:{X} RY:{Y}");
+        }
+        private async void BButton_Pressed(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(BButton, Color.FromRgba("#F00"), Colors.White, true);
+            await tcp.SendMessageAsync("BButton_Pressed");
+        }
+        private async void BButton_Released(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(BButton, Colors.Transparent, Color.FromRgba("#F00"));
+            await tcp.SendMessageAsync("BButton_Released");
+        }
+        private async void AButton_Pressed(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(AButton, Color.FromRgba("#0F0"), Colors.Black, true);
+            await tcp.SendMessageAsync("AButton_Pressed");
+        }
+        private async void AButton_Released(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(AButton, Colors.Transparent, Color.FromRgba("#0F0"));
+            await tcp.SendMessageAsync("AButton_Released");
+        }
+        private async void XButton_Pressed(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(XButton, Color.FromRgba("#0AF"), Colors.White, true);
+            await tcp.SendMessageAsync("XButton_Pressed");
+        }
+        private async void XButton_Released(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(XButton, Colors.Transparent, Color.FromRgba("#0AF"));
+            await tcp.SendMessageAsync("XButton_Released");
+        }
+        private async void YButton_Pressed(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(YButton, Colors.Yellow, Colors.Black, true);
+            await tcp.SendMessageAsync("YButton_Pressed");
+        }
+        private async void YButton_Released(object? sender, EventArgs e)
+        {
+            ChangeButtonColor(YButton, Colors.Transparent, Colors.Yellow);
+            await tcp.SendMessageAsync("YButton_Released");
+        }
+        private async void LeftButton_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(LeftButton, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("LeftButton_Pressed");
+        }
+        private async void LeftButton_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(LeftButton, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("LeftButton_Released");
+        }
+        private async void UpButton_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(UpButton, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("UpButton_Pressed");
+        }
+        private async void UpButton_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(UpButton, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("UpButton_Released");
+        }
+        private async void DownButton_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(DownButton, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("DownButton_Pressed");
+        }
+        private async void DownButton_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(DownButton, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("DownButton_Released");
+        }
+        private async void RightButton_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(RightButton, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("RightButton_Pressed");
+        }
+        private async void RightButton_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(RightButton, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("RightButton_Released");
+        }
+        private async void MenuButton_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(MenuButton, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("MenuButton_Pressed");
+        }
+        private async void MenuButton_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(MenuButton, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("MenuButton_Released");
+        }
+        private async void ShareButton_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(ShareButton, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("ShareButton_Pressed");
+        }
+        private async void ShareButton_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(ShareButton, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("ShareButton_Released");
+        }
+        private async void L1Button_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(L1Button, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("L1Button_Pressed");
+        }
+        private async void L1Button_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(L1Button, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("L1Button_Released");
+        }
+        private async void L2Button_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(L2Button, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("L2Button_Pressed");
+        }
+        private async void L2Button_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(L2Button, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("L2Button_Released");
+        }
+        private async void R1Button_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(R1Button, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("R1Button_Pressed");
+        }
+        private async void R1Button_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(R1Button, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("R1Button_Released");
+        }
+        private async void R2Button_Pressed(object sender, EventArgs e)
+        {
+            ChangeButtonColor(R2Button, Colors.White, Colors.Black, true);
+            await tcp.SendMessageAsync("R2Button_Pressed");
+        }
+        private async void R2Button_Released(object sender, EventArgs e)
+        {
+            ChangeButtonColor(R2Button, Colors.Transparent, Colors.Gray);
+            await tcp.SendMessageAsync("R2Button_Released");
+        }
     }
 
 }
