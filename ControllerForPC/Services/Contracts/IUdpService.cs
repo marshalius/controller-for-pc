@@ -12,6 +12,7 @@ namespace ControllerForPC.Services.Contracts
     {
         Task BroadcastAsync(string message);
         Task<(string address, int port, string message)> ReceiveAsync(CancellationToken cancellation);
+        void Dispose();
         
     }
 }

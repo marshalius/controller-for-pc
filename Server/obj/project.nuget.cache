@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "TlSgdxoDAH4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\canda\\Documents\\Repositories\\ControllerForPC\\Server\\Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\canda\\.nuget\\packages\\nefarius.vigem.client\\1.21.256\\nefarius.vigem.client.1.21.256.nupkg.sha512"
+  ],
+  "logs": []
+}

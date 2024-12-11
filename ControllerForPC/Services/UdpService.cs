@@ -11,7 +11,7 @@ namespace ControllerForPC.Services
 {
     public class UdpService(int port) : IUdpService
     {
-        private readonly UdpClient _udpClient = new ();
+        private readonly UdpClient _udpClient = new (port);
         private readonly IPEndPoint _endpoint = new (IPAddress.Broadcast, port);
 
         public async Task BroadcastAsync(string message)
