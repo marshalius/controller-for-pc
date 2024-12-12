@@ -77,7 +77,7 @@ namespace ControllerForPC.Services
         }
         public async Task SendAsync(string message)
         {
-            await _tcpService.SendAsync(message);
+            await _tcpService.SendAsync(message + "\n");
         }
         public void Disconnect()
         {

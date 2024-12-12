@@ -9,9 +9,10 @@ public partial class GamepadPage : ContentPage
 	private readonly ConnectionManager _connectionManager;
     readonly JoystickUtility leftJoystick;
     readonly JoystickUtility rightJoystick;
-    readonly Dictionary<Button, (string name, Color backgroundColor, Color textColor)> buttonPressedProps;
-    readonly Dictionary<Button, (string name, Color backgroundColor, Color textColor)> buttonReleasedProps;
-    
+    readonly Dictionary<IButton, (string name, Color backgroundColor, Color textColor)> buttonPressedProps;
+    readonly Dictionary<IButton, (string name, Color backgroundColor, Color textColor)> buttonReleasedProps;
+  
+
 
     public GamepadPage(ConnectionManager connectionManager)
     {
@@ -40,6 +41,7 @@ public partial class GamepadPage : ContentPage
 
             { MenuButton, ("MenuButton", Colors.White, Colors.Black)},
             { ShareButton, ("ShareButton", Colors.White, Colors.Black)},
+            { XboxButton, ("XboxButton", Colors.White, Colors.Black)},
 
             { L1Button, ("L1Button", Colors.White, Colors.Black)},
             { L2Button, ("L2Button", Colors.White, Colors.Black)},
@@ -60,6 +62,7 @@ public partial class GamepadPage : ContentPage
 
             { MenuButton, ("MenuButton", Colors.Transparent, Colors.Gray)},
             { ShareButton, ("ShareButton", Colors.Transparent, Colors.Gray)},
+            { XboxButton, ("XboxButton", Colors.Transparent, Colors.Gray)},
 
             { L1Button, ("L1Button", Colors.Transparent, Colors.Gray)},
             { L2Button, ("L2Button", Colors.Transparent, Colors.Gray)},
@@ -91,6 +94,7 @@ public partial class GamepadPage : ContentPage
         ContentLayout.SetLayoutBounds(RightJoystickLayout, new Rect(0.68, 0.7, screenHeight * 0.3 / screenWidth, screenHeight * 0.3 / screenHeight));
 
         ContentLayout.SetLayoutBounds(BackgroundView, new Rect(0, 0, screenWidth, screenHeight));
+        ContentLayout.SetLayoutBounds(XboxButton, new Rect(0.5, 0.1, screenHeight * 0.2, screenHeight * 0.2));
 
     }
 
@@ -108,7 +112,7 @@ public partial class GamepadPage : ContentPage
 
     private async void Button_Pressed(object sender, EventArgs e)
     {
-        if (sender is Button button)
+        if (sender is IButton button)
         {
             ButtonUtility.ChangeButtonColor(button, buttonPressedProps[button].backgroundColor, buttonPressedProps[button].textColor, true);
             await _connectionManager.SendAsync($"{buttonPressedProps[button].name}_Pressed");
@@ -116,7 +120,7 @@ public partial class GamepadPage : ContentPage
     }
     private async void Button_Released(object sender, EventArgs e)
     {
-        if (sender is Button button)
+        if (sender is IButton button)
         {
             ButtonUtility.ChangeButtonColor(button, buttonReleasedProps[button].backgroundColor, buttonReleasedProps[button].textColor);
             await _connectionManager.SendAsync($"{buttonReleasedProps[button].name}_Released");

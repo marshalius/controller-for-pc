@@ -65,12 +65,20 @@
                     </Canvas>
                     <Canvas x:Name="left_analog"  UseLayoutRounding="False">
                         <Canvas x:Name="left_analog_layout" UseLayoutRounding="False">
-                            <Ellipse x:Name="left_analog_layout_edge" Canvas.Left="5411.6699" Canvas.Top="5517.3598" Width="2753.1202" Height="2753.1202" Fill="#ff3b4245"/>
-                            <Ellipse x:Name="left_analog_layout_inside" Canvas.Left="5610.179999999999" Canvas.Top="5715.8699" Width="2356.1" Height="2356.1" Fill="#ff000000"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="left_analog_layout_edge" Canvas.Left="5411.6699" Canvas.Top="5517.3598" Width="2753.1202" Height="2753.1202" Fill="#ff3b4245"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="left_analog_layout_inside" Canvas.Left="5610.179999999999" Canvas.Top="5715.8699" Width="2356.1" Height="2356.1" Fill="#ff000000"/>
                         </Canvas>
                         <Canvas x:Name="left_analog_stick" UseLayoutRounding="False">
-                            <Ellipse x:Name="left_analog_stick_edge" Canvas.Left="5721.98" Canvas.Top="5827.6699" Width="2132.5" Height="2132.5" Fill="#ff22272a"/>
-                            <Ellipse x:Name="left_analog_stick_inside" Canvas.Left="6030.63002" Canvas.Top="6136.31992" Width="1515.19996" Height="1515.19996" Fill="#ff1c1d21"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="left_analog_stick_edge" Canvas.Left="5721.98" Canvas.Top="5827.6699" Width="2132.5" Height="2132.5" Fill="#ff22272a">
+                                <Rectangle.RenderTransform>
+                                    <TranslateTransform x:Name="leftAnalogTransform"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle RadiusX="5000" RadiusY="5000"  x:Name="left_analog_stick_inside" Canvas.Left="6030.63002" Canvas.Top="6136.31992" Width="1515.19996" Height="1515.19996" Fill="#ff1c1d21">
+                                <Rectangle.RenderTransform>
+                                    <TranslateTransform x:Name="leftAnalogTransform2"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
                         </Canvas>
                     </Canvas>
                     <Canvas x:Name="share_button" UseLayoutRounding="False">
@@ -87,12 +95,12 @@
                     </Canvas>
                     <Canvas x:Name="right_analog" UseLayoutRounding="False">
                         <Canvas x:Name="right_analog_layout" UseLayoutRounding="False">
-                            <Ellipse x:Name="right_analog_layout_edge" Canvas.Left="12694.8799" Canvas.Top="8360.789499999999" Width="2753.1202" Height="2753.1202" Fill="#ff3b4245"/>
-                            <Ellipse x:Name="right_analog_layout_inside" Canvas.Left="12893.390000000001" Canvas.Top="8559.2996" Width="2356.1" Height="2356.1" Fill="#ff000000"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="right_analog_layout_edge" Canvas.Left="12694.8799" Canvas.Top="8360.789499999999" Width="2753.1202" Height="2753.1202" Fill="#ff3b4245"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="right_analog_layout_inside" Canvas.Left="12893.390000000001" Canvas.Top="8559.2996" Width="2356.1" Height="2356.1" Fill="#ff000000"/>
                         </Canvas>
                         <Canvas x:Name="right_analog_stick" UseLayoutRounding="False">
-                            <Ellipse x:Name="right_analog_stick_edge" Canvas.Left="13005.19" Canvas.Top="8671.0996" Width="2132.5" Height="2132.5" Fill="#ff22272a"/>
-                            <Ellipse x:Name="right_analog_stick_inside" Canvas.Left="13313.84002" Canvas.Top="8979.749619999999" Width="1515.19996" Height="1515.19996" Fill="#ff1c1d21"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="right_analog_stick_edge" Canvas.Left="13005.19" Canvas.Top="8671.0996" Width="2132.5" Height="2132.5" Fill="#ff22272a"/>
+                            <Rectangle RadiusX="5000" RadiusY="5000" x:Name="right_analog_stick_inside" Canvas.Left="13313.84002" Canvas.Top="8979.749619999999" Width="1515.19996" Height="1515.19996" Fill="#ff1c1d21"/>
                         </Canvas>
                     </Canvas>
                     <Canvas x:Name="xyab_buttons" UseLayoutRounding="False">

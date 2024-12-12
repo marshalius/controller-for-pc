@@ -6,9 +6,119 @@
       xmlns:local="clr-namespace:Server.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1024"
-      Title="DashboardPage" Background="Black">
+      Title="DashboardPage" Background="#111">
 
-    <StackPanel x:Name="ContentPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
-        
-    </StackPanel>
+    <DockPanel>
+        <Grid x:Name="ContentPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" x:Name="GamepadPanel" Height="500" />
+            <Grid Grid.Row="1" Margin="50, 10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+                <Line  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" X1="0" X2="1000" Y1="0" Y2="0" HorizontalAlignment="Stretch" />
+                <Line  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" X1="0" X2="1000" Y1="0" Y2="0" HorizontalAlignment="Stretch" />
+                <Line  Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" X1="0" X2="1000" Y1="0" Y2="0" HorizontalAlignment="Stretch" />
+                <Line  Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" X1="0" X2="1000" Y1="0" Y2="0" HorizontalAlignment="Stretch" />
+
+
+                <Label Grid.Column="0" Grid.Row="0"  Content="Sol Tetik" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Sol Analog X" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label Grid.Column="0" Grid.Row="2" Content="Sol Analog Y" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <Label Grid.Column="1" Grid.Row="0" x:Name="leftTriggerValue" Content="0" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <Label Grid.Column="1" Grid.Row="1" x:Name="leftAnalogX" Content="0" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <Label Grid.Column="1" Grid.Row="2" x:Name="leftAnalogY" Content="0" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" />
+
+                <Label Grid.Column="3" Grid.Row="0" Content="Sağ Tetik" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label Grid.Column="3" Grid.Row="1" Content="Sağ Analog X" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label Grid.Column="3" Grid.Row="2" Content="Sağ Analog Y" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <Label Grid.Column="4" Grid.Row="0" x:Name="rightTriggerValue" Content="0" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <Label Grid.Column="4" Grid.Row="1" x:Name="rightAnalogX" Content="0" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <Label Grid.Column="4" Grid.Row="2" x:Name="rightAnalogY" Content="0" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </Grid>
+
+            <!--<StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+                <StackPanel Margin="10">
+                    <CheckBox Content="Sağ Analog" Foreground="White" Padding="20, 0" FontSize="18" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Grid Margin="20, 5" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label      Grid.Row="0" Grid.Column="0" Content="X" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="0" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="0" Grid.Column="2" Width="100" HorizontalAlignment="Stretch" FontSize="18" />
+
+                        <Label      Grid.Row="1" Grid.Column="0" Content="Y" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="1" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="1" Grid.Column="2" Width="100" HorizontalAlignment="Stretch" FontSize="18" />
+
+                        <Label      Grid.Row="2" Grid.Column="0" Content="Boyut" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="2" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="2" Grid.Column="2" Width="100" HorizontalAlignment="Stretch" FontSize="18"  />
+
+                        <Label      Grid.Row="3" Grid.Column="0" Content="Hassasiyet" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="3" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="3" Grid.Column="2" Width="100" HorizontalAlignment="Stretch"  FontSize="18"  />
+                    </Grid>
+
+                    <CheckBox Content="Sol Analog" Foreground="White" Padding="20, 0" FontSize="18" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <Grid Margin="20, 5" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label      Grid.Row="0" Grid.Column="0" Content="X" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="0" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="0" Grid.Column="2" Width="100" HorizontalAlignment="Stretch" FontSize="18" />
+
+                        <Label      Grid.Row="1" Grid.Column="0" Content="Y" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="1" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="1" Grid.Column="2" Width="100" HorizontalAlignment="Stretch" FontSize="18" />
+
+                        <Label      Grid.Row="2" Grid.Column="0" Content="Boyut" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="2" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="2" Grid.Column="2" Width="100" HorizontalAlignment="Stretch" FontSize="18"  />
+
+                        <Label      Grid.Row="3" Grid.Column="0" Content="Hassasiyet" Margin="0, 0, 10, 0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                        <Slider     Grid.Row="3" Grid.Column="1" Margin="10, 0" Minimum="0" Maximum="100" VerticalAlignment="Center" Foreground="Red" HorizontalAlignment="Stretch" />
+                        <TextBox    Grid.Row="3" Grid.Column="2" Width="100" HorizontalAlignment="Stretch"  FontSize="18"  />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>-->
+        </Grid>
+    </DockPanel>
+
 </Page>

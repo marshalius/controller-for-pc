@@ -22,7 +22,7 @@ namespace Server.Pages
     /// </summary>
     public partial class ConnectionPage : Page
     {
-        private ConnectionManager _connectionManager;
+        private readonly ConnectionManager _connectionManager;
         public ConnectionPage()
         {
             InitializeComponent();
