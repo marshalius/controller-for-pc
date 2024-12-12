@@ -42,18 +42,30 @@
         </Grid>
 
         <Grid x:Name="LeftJoystickLayout" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center">
-            <Grid.GestureRecognizers>
+            <!--<Grid.GestureRecognizers>
                 <PanGestureRecognizer PanUpdated="LeftJoystickPan_PanUpdated" />
-            </Grid.GestureRecognizers>
+            </Grid.GestureRecognizers>-->
             <BoxView x:Name="LeftJoystickArea" BackgroundColor="#111" WidthRequest="150" HeightRequest="150" CornerRadius="75" />
-            <BoxView x:Name="LeftJoystickBall" Color="#333" WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="Transparent" />
+            <!--<BoxView x:Name="LeftJoystickBall" Color="#333" WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="Transparent" />-->
+            <BoxView x:Name="LeftJoystickBall" Color="#333" BackgroundColor="Transparent" WidthRequest="100" HeightRequest="100" CornerRadius="50" >
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="LeftJoystickPan_Tapped" />
+                    <PanGestureRecognizer PanUpdated="LeftJoystickPan_PanUpdated" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
         </Grid>
         <Grid x:Name="RightJoystickLayout" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center">
-            <Grid.GestureRecognizers>
+            <!--<Grid.GestureRecognizers>
                 <PanGestureRecognizer PanUpdated="RightJoystickPan_PanUpdated" />
-            </Grid.GestureRecognizers>
+            </Grid.GestureRecognizers>-->
             <BoxView x:Name="RightJoystickArea" BackgroundColor="#111" WidthRequest="150" HeightRequest="150" CornerRadius="75" />
-            <BoxView x:Name="RightJoystickBall" Color="#333" WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="Transparent" />
+            <!--<BoxView x:Name="RightJoystickBall" Color="#333" WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="Transparent" />-->
+            <BoxView x:Name="RightJoystickBall" Color="#333" BackgroundColor="Transparent" WidthRequest="100" HeightRequest="100" CornerRadius="50" InputTransparent="False" >
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="RightJoystickPan_Tapped" />
+                    <PanGestureRecognizer PanUpdated="RightJoystickPan_PanUpdated" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
         </Grid>
 
     </AbsoluteLayout>

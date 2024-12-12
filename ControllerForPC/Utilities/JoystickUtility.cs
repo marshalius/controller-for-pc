@@ -12,9 +12,11 @@ namespace ControllerForPC.Utilities
         private double LastY { get; set; } = 0;
         private double Threshold { get; set; } = 1;
         private double SmoothingFactor { get; set; } = 0.5;
+        private double Sensitivity = 1;
+        private double DeadZone = 0;
 
-        private BoxView _area { get; set; }
-        private BoxView _ball { get; set; }
+        private readonly BoxView _area;
+        private readonly BoxView _ball;
         public JoystickUtility(BoxView area, BoxView ball)
         {
             _area = area;
@@ -39,8 +41,8 @@ namespace ControllerForPC.Utilities
             {
                 return;
             }
-            panX = LastX + (panX - LastX) * SmoothingFactor;
-            panY = LastY + (panY - LastY) * SmoothingFactor;
+            panX = (LastX + (panX - LastX) * SmoothingFactor) * Sensitivity;
+            panY = (LastY + (panY - LastY) * SmoothingFactor) * Sensitivity;
 
             double distance = Math.Sqrt(panX * panX + panY * panY);
             double limit = _area.Width / 2 - _ball.Width / 4;
@@ -59,21 +61,28 @@ namespace ControllerForPC.Utilities
             _ball.TranslationY = 0;
             _ball.Color = Color.FromArgb("#333");
         }
-
+        bool isAnalogMoving = false;
         public (short X, short Y) JoystickPanController(PanUpdatedEventArgs e)
         {
-            if (e.StatusType == GestureStatus.Running)
+            if (e.StatusType == GestureStatus.Started)
             {
-                JoystickMovement(e.TotalX, e.TotalY);
+                Vibration.Vibrate(1);
+            }
+            else if (e.StatusType == GestureStatus.Running)
+            {
+                if ((Math.Abs(e.TotalX) > DeadZone && Math.Abs(e.TotalY) > DeadZone) || isAnalogMoving)
+                {
+                    JoystickMovement(e.TotalX, e.TotalY);
+                    isAnalogMoving = true;
+                }
+                
             }
             else if (e.StatusType == GestureStatus.Completed)
             {
                 JoystickReset();
+                isAnalogMoving = false;
             }
-            else if (e.StatusType == GestureStatus.Started)
-            {
-                Vibration.Vibrate(1);
-            }
+            
 
             (short resultX, short resultY) = AxisNormalization(_ball.TranslationX, _ball.TranslationY, _ball.Width / 2);
 

@@ -109,6 +109,20 @@ public partial class GamepadPage : ContentPage
         (short X, short Y) = rightJoystick.JoystickPanController(e);
         await _connectionManager.SendAsync($"Analog RX:{X} RY:{Y}");
     }
+    private async void LeftJoystickPan_Tapped(object? sender, TappedEventArgs e)
+    {
+        LeftJoystickBall.Color = Color.FromRgba("#0f0");
+        Vibration.Vibrate(1);
+        await Task.Delay(200);
+        LeftJoystickBall.Color = Color.FromRgba("#333");
+    }
+    private async void RightJoystickPan_Tapped(object? sender, TappedEventArgs e)
+    {
+        RightJoystickBall.Color = Color.FromRgba("#0f0");
+        Vibration.Vibrate(1);
+        await Task.Delay(200);
+        RightJoystickBall.Color = Color.FromRgba("#333");
+    }
 
     private async void Button_Pressed(object sender, EventArgs e)
     {
@@ -126,4 +140,6 @@ public partial class GamepadPage : ContentPage
             await _connectionManager.SendAsync($"{buttonReleasedProps[button].name}_Released");
         }
     }
+
+
 }

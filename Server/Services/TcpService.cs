@@ -11,22 +11,29 @@ namespace Server.Services
 {
     public class TcpService : ITcpService
     {
-        private TcpListener _listener;
-        private NetworkStream _stream;
+        private TcpListener? _listener;
+        private NetworkStream? _stream;
         private bool _isConnected;
+        private int _port;
         
-        public async Task<bool> SetTcpServer(int port)
+        public async Task<bool> SetTcpServer(int port, CancellationTokenSource? udpTokenSource = null)
         {
-            _listener = new (IPAddress.Any ,port);
+            _port = port;
+            _listener = new (IPAddress.Any ,_port);
             _listener.Start();
             var client = await _listener.AcceptTcpClientAsync();
             _stream = client.GetStream();
+
+            udpTokenSource?.Cancel();
+
+            _isConnected = true;
             return _stream != null;
         }
         public void Disconnect()
         {
             _listener?.Dispose();
             _stream?.Dispose();
+            _isConnected = false;
         }
 
         public int GetAvailablePort(int firstPort, int endPort)
@@ -63,15 +70,40 @@ namespace Server.Services
         public async Task<string> ReceiveAsync()
         {
             byte[] buffer = new byte[1024];
-            int received = await _stream.ReadAsync(buffer.AsMemory(0, buffer.Length));
-            string message = Encoding.UTF8.GetString(buffer, 0, received);
-            return message;
+            if (_stream != null)
+            {
+                
+                int received = await _stream.ReadAsync(buffer.AsMemory(0, buffer.Length));
+                if (received == 0)
+                    throw new SocketException();
+                string message = Encoding.UTF8.GetString(buffer, 0, received);
+                return message;
+                
+            }
+            throw new NullReferenceException("Stream is unavailable");
+            
+            
+            
         }
 
         public async Task SendAsync(string message)
         {
             byte[] buffer = Encoding.UTF8.GetBytes(message);
-            await _stream.WriteAsync(buffer);
+            if (_stream != null)
+            {
+                try
+                {
+                    await _stream.WriteAsync(buffer);
+                }
+                catch (SocketException)
+                {
+                    Disconnect();
+                    await SetTcpServer(_port);
+                }
+
+            }
+            throw new NullReferenceException("Stream is unavailable");
+            
         }
 
         

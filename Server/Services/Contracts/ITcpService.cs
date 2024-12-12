@@ -10,7 +10,7 @@ namespace Server.Services.Contracts
     {
         int GetAvailablePort(int firstPort, int endPort);
         bool IsConnected();
-        Task<bool> SetTcpServer(int port);
+        Task<bool> SetTcpServer(int port, CancellationTokenSource udpTokenSource);
         Task SendAsync(string message);
         Task<string> ReceiveAsync();
         void Disconnect();

@@ -43,17 +43,37 @@ namespace Server.Pages
             };
             GamepadPanel.Children.Add(gamepadControl);
             Listen();
+
+            
         }
 
         private async void Listen()
         {
             while (true)
             {
-                string message = await _connectionManager.ReceiveAsync();
-                Debug.WriteLine(message);
-                ProcessMessage(message);
+                try
+                {
+                    string message = await _connectionManager.ReceiveAsync();
+                    ChangeConnectionStatus(true);
+                    Debug.WriteLine(message);
+                    ProcessMessage(message);
+                }
+                catch (Exception)
+                {
+                    ChangeConnectionStatus(false);
+                    _connectionManager.Disconnect();
+                    await _connectionManager.CreateServerAsync();
+                }
             }
             
+            
+        }
+
+        private void ChangeConnectionStatus(bool isConnected)
+        {
+            ConnectionStatusEllipse.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString((isConnected) ? "#0f0" : "#f00"));
+            ConnectionStatusLabel.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString((isConnected) ? "#0f0" : "#f00"));
+            ConnectionStatusLabel.Content = (isConnected) ? "Bağlı" : "Bağlantı kesildi";
         }
 
         private void ProcessMessage(string message)
@@ -67,7 +87,7 @@ namespace Server.Pages
                 if (command == "AButton_Pressed")
                 {
                     _controller.SetButtonState(Xbox360Button.A, true);
-                    gamepadControl.a_button_background.Fill = new SolidColorBrush(Colors.Green);
+                    gamepadControl.a_button_background.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0f0"));
                 }
                 else if (command == "AButton_Released")
                 {
@@ -207,7 +227,7 @@ namespace Server.Pages
                 else if (command == "XboxButton_Pressed")
                 {
                     _controller.SetButtonState(Xbox360Button.Guide, true);
-                    gamepadControl.xbox_button.Fill = new SolidColorBrush(Colors.Green);
+                    gamepadControl.xbox_button.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0f0"));
                 }
                 else if (command == "XboxButton_Released")
                 {

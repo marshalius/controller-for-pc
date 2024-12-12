@@ -13,11 +13,6 @@ namespace ControllerForPC.Services
         //readonly List<(string address, int port)> Servers;
         public async Task<(string address, int port, string name)> ScanServerAsync(int minPort, int maxPort)
         {
-#if ANDROID
-            string sendMessage = $"controller:{Android.OS.Build.Manufacturer}";
-#else
-            string sendMessage = $"controller";
-#endif
             
             while (true)
             {
@@ -29,18 +24,17 @@ namespace ControllerForPC.Services
                         Console.WriteLine($"{port} deneniyor...");
                         while (true)
                         {
-                            await _udpService.BroadcastAsync(sendMessage);
-                            CancellationTokenSource cts = new(TimeSpan.FromMilliseconds(100));
+                            CancellationTokenSource cts = new(TimeSpan.FromMilliseconds(200));
                             var received = await _udpService.ReceiveAsync(cts.Token);
                             Console.WriteLine($"{received.message}");
-                            if (received.message.StartsWith("controller"))
+                            if (received.message.StartsWith("[ControllerForPCServer]"))
                             {
-                                continue;
+                                string[] messageParts = received.message.Split("\n");
+                                string title = $"{messageParts[1]} ({messageParts[2]})";
+                                return (received.address, received.port, title);
                             }
-                            else
-                            {
-                                return (received.address, received.port, received.message);
-                            }
+
+
 
                         }
 

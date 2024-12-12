@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Windows.Controls;
+using System.Threading;
+using System.Windows.Navigation;
+using System.Windows.Media;
 
 namespace Server.Services
 {
@@ -24,26 +27,40 @@ namespace Server.Services
         public async Task<bool> CreateServerAsync()
         {
             _label.Content = "Uygun port aranıyor";
-            int port = _tcpService.GetAvailablePort(50000, 50100);
-            _label.Content = "Uzak bağlantı bekleniyor";
-            _udpService = new(port);
-            while (true)
-            {
-                string message = await _udpService.ListenAsync();
-                if (message.StartsWith("controller"))
-                {
-                    _label.Content = "Uzak bağlantı yakalandı";
-                    string sendMessage = $"[Response]{Environment.MachineName}\n{GetIPAddress()}:{port}";
-                    await _udpService.SendAsync(sendMessage);
-                    break;
+            int port = _tcpService.GetAvailablePort(50000, 50010);
+            
 
-                }
-            }
-            _udpService.Dispose();
+            string sendMessage = $"[ControllerForPCServer]\n{Environment.MachineName}\n{GetIPAddress()}:{port}";
+            CancellationTokenSource udpTokenSource = new ();
+            _ = BroadcastPortAsync(port, sendMessage, udpTokenSource.Token);
 
             _label.Content = "Sunucu ayarlanıyor";
-            return await _tcpService.SetTcpServer(port);
+            return await _tcpService.SetTcpServer(port, udpTokenSource);
 
+        }
+
+        private async Task BroadcastPortAsync(int port, string message, CancellationToken token)
+        {
+            _udpService = new(port);
+            try
+            {
+                while (true)
+                {
+                    token.ThrowIfCancellationRequested();
+                    await _udpService.SendAsync(message);
+                    await Task.Delay(100, token);
+                }
+
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("UDP yayını sonlandırıldı.");
+            }
+            finally
+            {
+                _udpService.Dispose();
+            }
+            
         }
 
         public void Disconnect()
@@ -58,7 +75,9 @@ namespace Server.Services
 
         public async Task<string> ReceiveAsync()
         {
-            return await _tcpService.ReceiveAsync();
+            string message = await _tcpService.ReceiveAsync();
+            return message;
+            
         }
 
         public async Task SendAsync(string message)
@@ -84,5 +103,6 @@ namespace Server.Services
             }
             throw new Exception("IP adresi tespit edilemedi.");
         }
+
     }
 }

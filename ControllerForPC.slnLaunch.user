@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "ControllerForPC\\ControllerForPC.csproj",
+        "Action": "Start",
+        "DebugTarget": "Xiaomi 2311DRK48G (Android 14.0 - API 34)"
+      },
+      {
+        "Path": "Server\\Server.csproj",
+        "Action": "Start",
+        "DebugTarget": "Server"
+      }
+    ]
+  }
+]
