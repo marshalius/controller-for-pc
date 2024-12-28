@@ -11,8 +11,11 @@ public partial class ConnectionPage : ContentPage
 	public ConnectionPage()
 	{
 		InitializeComponent();
-
-		_connectionManager = new ConnectionManager();
+#if ANDROID
+        var activity = Platform.CurrentActivity;
+        activity.RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+#endif
+        _connectionManager = new ConnectionManager();
         StartBackgroundColorAnimation();
         ScanServers();
 	}

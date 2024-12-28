@@ -33,11 +33,7 @@ namespace ControllerForPC.Services
                                 string title = $"{messageParts[1]} ({messageParts[2]})";
                                 return (received.address, received.port, title);
                             }
-
-
-
                         }
-
                     }
                     catch (OperationCanceledException)
                     {
@@ -52,12 +48,8 @@ namespace ControllerForPC.Services
                     {
                         _udpService.Dispose();
                     }
-
-
                 }
             }
-            
-
         }
         public async Task ConnectAsync(string host, int port)
         {

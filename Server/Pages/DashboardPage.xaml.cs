@@ -352,5 +352,11 @@ namespace Server.Pages
             double axisY = -y / short.MaxValue * max;
             return ((short)axisX, (short)axisY);
         }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
+        }
     }
 }

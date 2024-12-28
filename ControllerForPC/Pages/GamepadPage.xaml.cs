@@ -1,3 +1,4 @@
+using ControllerForPC.Models;
 using ControllerForPC.Services;
 using ControllerForPC.Services.Contracts;
 using ControllerForPC.Utilities;
@@ -17,6 +18,7 @@ public partial class GamepadPage : ContentPage
     public GamepadPage(ConnectionManager connectionManager)
     {
         InitializeComponent();
+
 
 #if ANDROID
         var activity = Platform.CurrentActivity;
@@ -69,15 +71,14 @@ public partial class GamepadPage : ContentPage
             { R1Button, ("R1Button", Colors.Transparent, Colors.Gray)},
             { R2Button, ("R2Button", Colors.Transparent, Colors.Gray)},
         };
+
+        ProcessIncomingMessages();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        
-
-        
         DisplayInfo displayInfo = DeviceDisplay.Current.MainDisplayInfo;
         double screenWidth = displayInfo.Height / displayInfo.Density;
         double screenHeight = displayInfo.Width / displayInfo.Density;
@@ -96,6 +97,16 @@ public partial class GamepadPage : ContentPage
         ContentLayout.SetLayoutBounds(BackgroundView, new Rect(0, 0, screenWidth, screenHeight));
         ContentLayout.SetLayoutBounds(XboxButton, new Rect(0.5, 0.1, screenHeight * 0.2, screenHeight * 0.2));
 
+    }
+
+    private async void ProcessIncomingMessages()
+    {
+        string message = await _connectionManager.ReceiveAsync();
+        if(message.StartsWith("[layout]"))
+        {
+            IViewLayout viewLayout = LayoutUtility.SetLayout(message);
+        }
+        
     }
 
     

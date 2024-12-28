@@ -28,3 +28,6 @@ C:\Users\canda\Documents\Repositories\ControllerForPC\Server\obj\Debug\net9.0-wi
 C:\Users\canda\Documents\Repositories\ControllerForPC\Server\bin\Debug\net9.0-windows\Nefarius.ViGEm.Client.dll
 C:\Users\canda\Documents\Repositories\ControllerForPC\Server\obj\Debug\net9.0-windows\Server.csproj.AssemblyReference.cache
 C:\Users\canda\Documents\Repositories\ControllerForPC\Server\obj\Debug\net9.0-windows\Server.csproj.Up2Date
+C:\Users\canda\Documents\Repositories\ControllerForPC\Server\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
+C:\Users\canda\Documents\Repositories\ControllerForPC\Server\obj\Debug\net9.0-windows\Pages\SettingsWindow.g.cs
+C:\Users\canda\Documents\Repositories\ControllerForPC\Server\obj\Debug\net9.0-windows\Pages\SettingsWindow.baml

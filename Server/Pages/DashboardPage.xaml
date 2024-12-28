@@ -38,7 +38,7 @@
                         <ComboBoxItem Content="C" />
                         
                     </ComboBox>
-                    <Frame FontSize="18" Height="30" Width="30" Background="Gray" HorizontalAlignment="Right" />
+                    <Button x:Name="SettingsButton" FontSize="18" Height="30" Width="30" Background="Gray" HorizontalAlignment="Right" Click="SettingsButton_Click" />
                 </StackPanel>
                 
             </DockPanel>

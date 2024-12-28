@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
 C:\Users\canda\Documents\Repositories\ControllerForPC\Server\App.xaml
-4-419107728
+5105336462
 
-131993829396
-202-1697532267
-MainWindow.xaml;Pages\Components\GamepadControl.xaml;Pages\ConnectionPage.xaml;Pages\DashboardPage.xaml;
+1473210771
+203-1768109119
+MainWindow.xaml;Pages\Components\GamepadControl.xaml;Pages\ConnectionPage.xaml;Pages\DashboardPage.xaml;Pages\SettingsWindow.xaml;
 
 False
 
