@@ -1,4 +1,4 @@
-# ControllerForPC
+# Controller For PC
 
 This project is a gamepad application built using .NET MAUI, which allows you to use your Android phone as a gamepad for your Windows PC. The application communicates with a server running on the PC side, transmitting input data from the mobile device to the PC and transforming it into gamepad inputs. Additionally, the application offers a visual interface on the PC to control elements like button size and positioning.
 
