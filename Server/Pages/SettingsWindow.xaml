@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Server.Pages"
         mc:Ignorable="d"
-        Title="SettingsWindow"
-        Height="640" Width="640"
+        Title="Profil"
+        Height="720" Width="640"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         ShowInTaskbar="False"
         DataContext="{Binding}">
@@ -44,29 +45,29 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="RightAnalogXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="RightAnalogXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="RightAnalogXSlider" Tag="RightAnalogX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="RightAnalogXTextBox" Tag="RightAnalogX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="RightAnalogYSlider" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
-                                <TextBox x:Name="RightAnalogYTextBox" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="RightAnalogYSlider" Tag="RightAnalogY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="RightAnalogYTextBox" Tag="RightAnalogY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="RightAnalogWidthSlider" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="RightAnalogWidthTextBox" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="RightAnalogWidthSlider" Tag="RightAnalogWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="RightAnalogWidthTextBox" Tag="RightAnalogWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
                                     <Label Content="Kilitle" />
-                                    <CheckBox VerticalAlignment="Center" />
+                                    <CheckBox x:Name="RightAnalogSizeCheckBox" VerticalAlignment="Center" />
                                 </StackPanel>
 
                                 <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="RightAnalogHeightSlider" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="RightAnalogHeightTextBox" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="RightAnalogHeightSlider" Tag="RightAnalogHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="RightAnalogHeightTextBox" Tag="RightAnalogHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="3" Grid.Column="1" Content="Hassasiyet:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="RightAnalogSensitivitySlider" Grid.Row="3" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="3" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
-                                <TextBox x:Name="RightAnalogSensitivityTextBox" Grid.Row="3" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="RightAnalogSensitivitySlider" Tag="RightAnalogSensitivity" Grid.Row="3" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="3" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="RightAnalogSensitivityTextBox" Tag="RightAnalogSensitivity" Grid.Row="3" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                             </Grid>
                         </StackPanel>
@@ -101,29 +102,29 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="LeftAnalogXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="LeftAnalogXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="LeftAnalogXSlider" Tag="LeftAnalogX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="LeftAnalogXTextBox" Tag="LeftAnalogX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="LeftAnalogYSlider" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ></Slider>
-                                <TextBox x:Name="LeftAnalogYTextBox" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" />
+                                <Slider x:Name="LeftAnalogYSlider" Tag="LeftAnalogY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="LeftAnalogYTextBox" Tag="LeftAnalogY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="LeftAnalogWidthSlider" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center"></Slider>
-                                <TextBox x:Name="LeftAnalogWidthTextBox" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" />
+                                <Slider x:Name="LeftAnalogWidthSlider" Tag="LeftAnalogWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="LeftAnalogWidthTextBox" Tag="LeftAnalogWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
                                     <Label Content="Kilitle" />
-                                    <CheckBox VerticalAlignment="Center" />
+                                    <CheckBox x:Name="LeftAnalogSizeCheckBox" VerticalAlignment="Center" />
                                 </StackPanel>
 
                                 <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="LeftAnalogHeightSlider" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center"></Slider>
-                                <TextBox x:Name="LeftAnalogHeightTextBox" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" />
+                                <Slider x:Name="LeftAnalogHeightSlider" Tag="LeftAnalogHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="LeftAnalogHeightTextBox" Tag="LeftAnalogHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="3" Grid.Column="1" Content="Hassasiyet:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="LeftAnalogSensitivitySlider" Grid.Row="3" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="3" Width="100" VerticalAlignment="Center" ></Slider>
-                                <TextBox x:Name="LeftAnalogSensitivityTextBox" Grid.Row="3" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" />
+                                <Slider x:Name="LeftAnalogSensitivitySlider" Tag="LeftAnalogSensitivity" Grid.Row="3" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="3" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="LeftAnalogSensitivityTextBox" Tag="LeftAnalogSensitivity" Grid.Row="3" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                             </Grid>
                         </StackPanel>
@@ -159,22 +160,25 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="XYABXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="XYABXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="XYABXSlider" Tag="XYABX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="XYABXTextBox" Tag="XYABX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="XYABYSlider" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
-                                <TextBox x:Name="XYABYTextBox" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="XYABYSlider" Tag="XYABY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="XYABYTextBox" Tag="XYABY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="XYABWidthSlider" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="XYABWidthTextBox" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="XYABWidthSlider" Tag="XYABWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="XYABWidthTextBox" Tag="XYABWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
-                                <Button Grid.Row="2" Grid.Column="5" Width="25" Height="25" Margin="10, 0" />
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="XYABSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
 
                                 <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="XYABHeightSlider" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="XYABHeightTextBox" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="XYABHeightSlider" Tag="XYABHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="XYABHeightTextBox" Tag="XYABHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                             </Grid>
                         </StackPanel>
@@ -209,22 +213,25 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="DirectionalXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="DirectionalXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="DirectionalXSlider" Tag="DirectionalX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="DirectionalXTextBox" Tag="DirectionalX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="DirectionalYSlider" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
-                                <TextBox x:Name="DirectionalYTextBox" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="DirectionalYSlider" Tag="DirectionalY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="DirectionalYTextBox" Tag="DirectionalY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="DirectionalWidthSlider" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="DirectionalWidthTextBox" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="DirectionalWidthSlider" Tag="DirectionalWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="DirectionalWidthTextBox" Tag="DirectionalWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
-                                <Button Grid.Row="2" Grid.Column="5" Width="25" Height="25" Margin="10, 0" />
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="DirectionalSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
 
                                 <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="DirectionalHeightSlider" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="DirectionalHeightTextBox" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="DirectionalHeightSlider" Tag="DirectionalHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="DirectionalHeightTextBox" Tag="DirectionalHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                             </Grid>
                         </StackPanel>
@@ -259,22 +266,25 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="R1ButtonXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="R1ButtonXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R1ButtonXSlider" Tag="R1ButtonX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="R1ButtonXTextBox" Tag="R1ButtonX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="R1ButtonYSlider" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
-                                <TextBox x:Name="R1ButtonYTextBox" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R1ButtonYSlider" Tag="R1ButtonY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="R1ButtonYTextBox" Tag="R1ButtonY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="R1ButtonWidthSlider" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="R1ButtonWidthTextBox" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R1ButtonWidthSlider" Tag="R1ButtonWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="R1ButtonWidthTextBox" Tag="R1ButtonWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
-                                <Button Grid.Row="2" Grid.Column="5" Width="25" Height="25" Margin="10, 0" />
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="R1ButtonSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
 
                                 <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="R1ButtonHeightSlider" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="R1ButtonHeightTextBox" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R1ButtonHeightSlider" Tag="R1ButtonHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="R1ButtonHeightTextBox" Tag="R1ButtonHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                             </Grid>
                         </StackPanel>
@@ -310,22 +320,25 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="R2TriggerXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="R2TriggerXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R2TriggerXSlider" Tag="R2TriggerX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="R2TriggerXTextBox" Tag="R2TriggerX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="R2TriggerYSlider" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
-                                <TextBox x:Name="R2TriggerYTextBox" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R2TriggerYSlider" Tag="R2TriggerY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="R2TriggerYTextBox" Tag="R2TriggerY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                <Slider x:Name="R2TriggerWidthSlider" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="R2TriggerWidthTextBox" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R2TriggerWidthSlider" Tag="R2TriggerWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="R2TriggerWidthTextBox" Tag="R2TriggerWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
-                                <Button Grid.Row="2" Grid.Column="5" Width="25" Height="25" Margin="10, 0" />
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="R2TriggerSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
 
                                 <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-                                <Slider x:Name="R2TriggerHeightSlider" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
-                                <TextBox x:Name="R2TriggerHeightTextBox" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" TextChanged="TextBox_TextChanged" />
+                                <Slider x:Name="R2TriggerHeightSlider" Tag="R2TriggerHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="R2TriggerHeightTextBox" Tag="R2TriggerHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
 
                                 <Label Grid.Row="3" Grid.Column="1" Content="Analog:" VerticalAlignment="Center" HorizontalAlignment="Right" />
                                 <CheckBox x:Name="R2TriggerIsAnalogCheckBox" Grid.Row="3" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
@@ -337,6 +350,282 @@
                                     <RadioButton Content="Yatay" VerticalAlignment="Center" Margin="10, 0" />
                                     <RadioButton Content="Ters Yatay" VerticalAlignment="Center" Margin="10, 0" />
                                 </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="SOL BUMPER (L1)">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="20, 0">
+                                <Label Grid.Row="0" Grid.Column="1" Content="Göster:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <CheckBox x:Name="L1ButtonCheckBox" Grid.Row="0" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Grid Margin="20, 0" IsEnabled="{Binding ElementName=R1ButtonCheckBox, Path=IsChecked}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="L1ButtonXSlider" Tag="L1ButtonX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="L1ButtonXTextBox" Tag="L1ButtonX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="L1ButtonYSlider" Tag="L1ButtonY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="L1ButtonYTextBox" Tag="L1ButtonY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="L1ButtonWidthSlider" Tag="L1ButtonWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="L1ButtonWidthTextBox" Tag="L1ButtonWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="L1ButtonSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                                <Slider x:Name="L1ButtonHeightSlider" Tag="L1ButtonHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="L1ButtonHeightTextBox" Tag="L1ButtonHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="SOL TETİK (L2)">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="20, 0">
+                                <Label Grid.Row="0" Grid.Column="1" Content="Göster:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <CheckBox x:Name="L2TriggerCheckBox" Grid.Row="0" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Grid Margin="20, 0" IsEnabled="{Binding ElementName=R2TriggerCheckBox, Path=IsChecked}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="L2TriggerXSlider" Tag="L2TriggerX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="L2TriggerXTextBox" Tag="L2TriggerX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="L2TriggerYSlider" Tag="L2TriggerY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="L2TriggerYTextBox" Tag="L2TriggerY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="L2TriggerWidthSlider" Tag="L2TriggerWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="L2TriggerWidthTextBox" Tag="L2TriggerWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="L2TriggerSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                                <Slider x:Name="L2TriggerHeightSlider" Tag="L2TriggerHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="L2TriggerHeightTextBox" Tag="L2TriggerHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="3" Grid.Column="1" Content="Analog:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <CheckBox x:Name="L2TriggerIsAnalogCheckBox" Grid.Row="3" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
+
+                                <Label Grid.Row="4" Grid.Column="1" Content="Yön:" VerticalAlignment="Center" HorizontalAlignment="Right" IsEnabled="{Binding ElementName=R2TriggerIsAnalogCheckBox, Path=IsChecked}" />
+                                <StackPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="7" Orientation="Horizontal" IsEnabled="{Binding ElementName=R2TriggerIsAnalogCheckBox, Path=IsChecked}">
+                                    <RadioButton Content="Dikey" VerticalAlignment="Center" Margin="10, 0" />
+                                    <RadioButton Content="Ters Dikey" VerticalAlignment="Center" Margin="10, 0" />
+                                    <RadioButton Content="Yatay" VerticalAlignment="Center" Margin="10, 0" />
+                                    <RadioButton Content="Ters Yatay" VerticalAlignment="Center" Margin="10, 0" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="MENÜ BUTONU">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="20, 0">
+                                <Label Grid.Row="0" Grid.Column="1" Content="Göster:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <CheckBox x:Name="MenuButtonCheckBox" Grid.Row="0" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Grid Margin="20, 0" IsEnabled="{Binding ElementName=R1ButtonCheckBox, Path=IsChecked}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="MenuButtonXSlider" Tag="MenuButtonX" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="MenuButtonXTextBox" Tag="MenuButtonX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="MenuButtonYSlider" Tag="MenuButtonY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="MenuButtonYTextBox" Tag="MenuButtonY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="MenuButtonWidthSlider" Tag="MenuButtonWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="MenuButtonWidthTextBox" Tag="MenuButtonWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="MenuButtonSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                                <Slider x:Name="MenuButtonHeightSlider" Tag="MenuButtonHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="MenuButtonHeightTextBox" Tag="MenuButtonHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="PAYLAŞ BUTONU">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="20, 0">
+                                <Label Grid.Row="0" Grid.Column="1" Content="Göster:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <CheckBox x:Name="ShareButtonCheckBox" Grid.Row="0" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Grid Margin="20, 0" IsEnabled="{Binding ElementName=R1ButtonCheckBox, Path=IsChecked}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="ShareButtonXSlider" Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="ShareButtonXTextBox" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="ShareButtonYSlider" Tag="ShareButtonY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="ShareButtonYTextBox" Tag="ShareButtonY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="ShareButtonWidthSlider" Tag="ShareButtonWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="ShareButtonWidthTextBox" Tag="ShareButtonWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="ShareButtonSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                                <Slider x:Name="ShareButtonHeightSlider" Tag="ShareButtonHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="ShareButtonHeightTextBox" Tag="ShareButtonHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="XBOX BUTONU">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="20, 0">
+                                <Label Grid.Row="0" Grid.Column="1" Content="Göster:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <CheckBox x:Name="XboxButtonCheckBox" Grid.Row="0" Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <Grid Margin="20, 0" IsEnabled="{Binding ElementName=R1ButtonCheckBox, Path=IsChecked}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Grid.Row="1" Grid.Column="1" Content="Konum X:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="XboxButtonXSlider" Tag="XboxButtonX"  Grid.Row="1" Grid.Column="2"  Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="XboxButtonXTextBox" Tag="XboxButtonX" Grid.Row="1" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="1" Grid.Column="7" Content="Konum Y:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="XboxButtonYSlider" Tag="XboxButtonY" Grid.Row="1" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged" ></Slider>
+                                <TextBox x:Name="XboxButtonYTextBox" Tag="XboxButtonY" Grid.Row="1" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="Genişlik:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <Slider x:Name="XboxButtonWidthSlider" Tag="XboxButtonWidth" Grid.Row="2" Grid.Column="2" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="XboxButtonWidthTextBox" Tag="XboxButtonWidth" Grid.Row="2" Grid.Column="3" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
+                                <StackPanel Grid.Row="2" Grid.Column="5" Orientation="Horizontal" Margin="10, 0">
+                                    <Label Content="Kilitle" />
+                                    <CheckBox x:Name="XboxButtonSizeCheckBox" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <Label Grid.Row="2" Grid.Column="7" Content="Yükseklik:" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+                                <Slider x:Name="XboxButtonHeightSlider" Tag="XboxButtonHeight" Grid.Row="2" Grid.Column="8" Margin="10, 0" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"></Slider>
+                                <TextBox x:Name="XboxButtonHeightTextBox" Tag="XboxButtonHeight" Grid.Row="2" Grid.Column="9" Height="20" Width="30" Text="100" TextAlignment="Right" LostFocus="TextBox_LostFocus" KeyDown="TextBox_KeyDown" />
+
                             </Grid>
                         </StackPanel>
                     </Expander>
