@@ -33,12 +33,11 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30, 0" >
                     <ComboBox HorizontalAlignment="Right" Width="200" Height="30" FontSize="18" Margin="10, 0" >
-                        <ComboBoxItem Content="A" />
-                        <ComboBoxItem Content="B" />
-                        <ComboBoxItem Content="C" />
-                        
+                        <ComboBoxItem IsSelected="True" Content="Standart" />
+                        <ComboBoxItem Content="Yarış" />
+
                     </ComboBox>
-                    <Button x:Name="SettingsButton" FontSize="18" Height="30" Width="30" Background="Gray" HorizontalAlignment="Right" Click="SettingsButton_Click" />
+                    <Button x:Name="SettingsButton" Visibility="Hidden" FontSize="18" Height="30" Width="30" Background="Gray" HorizontalAlignment="Right" Click="SettingsButton_Click" />
                 </StackPanel>
                 
             </DockPanel>
